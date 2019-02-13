@@ -1,0 +1,24 @@
+{
+  "name": "lambda-optimization-http-keep-alive",
+  "version": "1.0.0",
+  "description": "Testing http keep alive in lambda / aws-sdk",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy" : "sls deploy --stage dev --account XXXXXXXXXXXX",
+    "remove" : "sls remove --stage dev --account XXXXXXXXXXXX"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serverless-barcelona/lambda-optimization-http-keep-alive.git"
+  },
+  "dependencies": {
+    "aws-sdk": "2.401.0"
+  },
+  "author": "Simone Zennaro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/serverless-barcelona/lambda-optimization-http-keep-alive/issues"
+  },
+  "homepage": "https://github.com/serverless-barcelona/lambda-optimization-http-keep-alive#readme"
+}

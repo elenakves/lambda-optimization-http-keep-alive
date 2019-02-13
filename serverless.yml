@@ -1,0 +1,74 @@
+service: http-keep-alive-api
+
+custom:
+  tableName: keep-alive-test
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'} 
+  region: ${opt:region, 'eu-west-1'}
+  profile: ${opt:profile, 'devel'}
+  memorySize: 128
+  timeout: 10
+  environment:
+      TABLE: ${self:custom.tableName}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:DeleteItem"
+        - "dynamodb:GetItem"
+        - "dynamodb:PutItem"
+      Resource: "arn:aws:dynamodb:${self:provider.region}:${opt:account}:table/${self:custom.tableName}"
+
+functions:
+  keepalive:
+    handler: keepalive.matricula
+    events:
+      - http:
+          path: kmatricula/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+      - http:
+          path: kmatricula/{id}
+          method: put
+          request:
+            parameters:
+              paths:
+                id: true
+  dontkeepalive:
+    handler: dontkeepalive.matricula
+    events:
+      - http:
+          path: matricula/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+      - http:
+          path: matricula/{id}
+          method: put
+          request:
+            parameters:
+              paths:
+                id: true
+
+resources:
+  Resources:
+    KeepAliveTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: "Matricula"
+            AttributeType: "S"
+        KeySchema: 
+          - AttributeName: "Matricula"
+            KeyType: "HASH"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
