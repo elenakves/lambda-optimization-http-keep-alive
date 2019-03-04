@@ -41,9 +41,8 @@ module.exports.matricula = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: res,
-      log: `${event.httpMethod} - ${JSON.stringify(event.queryStringParameters)}: ${end - start}`
+      message: `${event.httpMethod} - ${JSON.stringify(event.queryStringParameters)}: ${end - start}`,
+      input: res
     }),
   };
 

@@ -5,8 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy" : "sls deploy --stage dev --account XXXXXXXXXXXX",
-    "remove" : "sls remove --stage dev --account XXXXXXXXXXXX"
+    "deploy": "sls deploy --stage dev",
+    "remove": "sls remove --stage dev"
   },
   "repository": {
     "type": "git",

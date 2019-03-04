@@ -8,7 +8,8 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage, 'dev'} 
   region: ${opt:region, 'eu-west-1'}
-  profile: ${opt:profile, 'devel'}
+  profile: ${opt:profile, 'dev'}
+  account: ${file(./account.yml):account}
   memorySize: 128
   timeout: 10
   environment:
@@ -19,7 +20,7 @@ provider:
         - "dynamodb:DeleteItem"
         - "dynamodb:GetItem"
         - "dynamodb:PutItem"
-      Resource: "arn:aws:dynamodb:${self:provider.region}:${opt:account}:table/${self:custom.tableName}"
+      Resource: "arn:aws:dynamodb:${self:provider.region}:${self:provider.account}:table/${self:custom.tableName}"
 
 functions:
   keepalive:
