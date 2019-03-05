@@ -24,12 +24,12 @@ module.exports.matricula = async (event, context) => {
       }
   }
   const end = new Date().getTime();
-  console.log(`${event.httpMethod} - ${JSON.stringify(event.queryStringParameters)}: ${end - start}`);
+  console.log(`${event.httpMethod} - without keepalive: ${end - start}`);
 
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: `${event.httpMethod} - ${JSON.stringify(event.queryStringParameters)}: ${end - start}`,
+      message: `${event.httpMethod} - without keepalive:: ${end - start}`,
       input: res
     }),
   };
